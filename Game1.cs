@@ -22,12 +22,15 @@ namespace FluteCap
 		SoundEffect Flute;
 		int FluteCounter;
 		int Health;
+		Texture2D Heart;
+		Vector2 Heart1, Heart2, Heart3;
 		//PlayerBools
 		bool PlayerImmobilized, HasFlute, PlaysTheFlute;
 		bool PlayerAlive;
 		//Universal
 		int Level;
 		bool OutOfArea;
+		SpriteFont Font;
 		//Level one props
 		Vector2 MountainWall, StonePos;
 		Rectangle MountainRec, StoneRec;
@@ -35,8 +38,8 @@ namespace FluteCap
 		Vector2 FencePos;
 		Rectangle FenceRec;
 		Texture2D Fence;
-		Vector2 TreePos1, TreePos2, TreePos3;
-		Rectangle TreeRec1, TreeRec2, TreeRec3;
+		Vector2 TreePos1, TreePos2;
+		Rectangle TreeRec1, TreeRec2;
 		Texture2D Tree;
 		//Level two props
 		Rectangle BossRec;
@@ -66,7 +69,7 @@ namespace FluteCap
 			PlayerSpeed.X = 4; PlayerSpeed.Y = 4;
 			PlayerImmobilized = false; HasFlute = true; PlaysTheFlute = false;
 			PlayerAlive = true;
-			FluteCounter = 0; Health = 6;
+			FluteCounter = 0; Health = 3;
 			//Level one Props
 			MountainWall.X = 700;
 			MountainWall.Y = 0; MountainRec = new Rectangle(700, 0, 100, 300);
@@ -100,8 +103,12 @@ namespace FluteCap
 			Fence = Content.Load<Texture2D>("Sprites/Fence");
 			Tree = Content.Load<Texture2D>("Sprites/Tree");
 			Boss = Content.Load<Texture2D>("Sprites/Zombie1");
-			Flute = Content.Load<SoundEffect>("Sounds/Kazoo-SoundBible.com-161921968");
+			Flute = Content.Load<SoundEffect>("Sounds/Kazoo-SoundBible.com-161921968"); 
+			Flute = Content.Load<SoundEffect>("Sounds/Flute_tone");				//Changing to this will not be the accurate music for the game
+																				//but it might be a nicer sound
 			Stone = Content.Load<Texture2D>("Sprites/Rock");
+			Heart = Content.Load<Texture2D>("Sprites/Heart");
+			Font = Content.Load<SpriteFont>("Font/Font");
 			// TODO: use this.Content to load your game content here
 		}
 
@@ -125,6 +132,7 @@ namespace FluteCap
 			if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
 				Exit();
 			KeyboardState UserKeyboard = Keyboard.GetState();
+			//Player controlls and check if the player tries to escape.
 			if (PlayerAlive)
 			{
 				if (!PlayerImmobilized)
@@ -139,11 +147,15 @@ namespace FluteCap
 				if (OutOfArea == true)
 				{ PlayerPos.X = 300; PlayerPos.Y = 300; Health--; Level = 1; }
 			}
+			Heart1.X = PlayerPos.X; Heart1.Y = PlayerPos.Y - 20;
+			Heart2.X = PlayerPos.X + 20 ; Heart2.Y = PlayerPos.Y - 20;
+			Heart3.X = PlayerPos.X + 40 ; Heart3.Y = PlayerPos.Y - 20;
 			switch (Level)
 			{
 				case 0:
 					if (UserKeyboard.IsKeyDown(Keys.Enter)) { Level = 1; }
 					break;
+					//Level 1 with multiple props but no other entities(creatures) and most of the code is so the player wont walk through what should be solid
 				case 1:
 					//Collision with mountain
 					if (PlayerRectangle.Right > MountainRec.Left && PlayerRectangle.Right < MountainRec.Left + 5 && PlayerRectangle.Intersects(MountainRec))
@@ -159,43 +171,49 @@ namespace FluteCap
 					}
 					if (PlayerRectangle.Intersects(FenceRec))
 					{
-						if (UserKeyboard.IsKeyDown(Keys.W) && PlayerPos.Y > FenceRec.Bottom - 4) { PlayerPos.Y += PlayerSpeed.Y; }
+						if (UserKeyboard.IsKeyDown(Keys.W) && PlayerPos.Y > FenceRec.Bottom - 5) { PlayerPos.Y += PlayerSpeed.Y; }
 						//if (UserKeyboard.IsKeyDown(Keys.S)) { PlayerPos.Y -= PlayerSpeed.Y; }
-						if (UserKeyboard.IsKeyDown(Keys.A) && PlayerPos.X > FenceRec.Right - 4) { PlayerPos.X += PlayerSpeed.X; }
+						if (UserKeyboard.IsKeyDown(Keys.A) && PlayerPos.X > FenceRec.Right - 5) { PlayerPos.X += PlayerSpeed.X; }
 						//if (UserKeyboard.IsKeyDown(Keys.D)) { PlayerPos.X -= PlayerSpeed.X; }
 					}
 					if (PlayerRectangle.Intersects(TreeRec1))
 					{
-						if (UserKeyboard.IsKeyDown(Keys.W) && PlayerPos.Y > TreeRec1.Bottom - 4) { PlayerPos.Y += PlayerSpeed.Y; }
-						if (UserKeyboard.IsKeyDown(Keys.S) && PlayerRectangle.Bottom < TreeRec1.Top + 4) { PlayerPos.Y -= PlayerSpeed.Y; }
-						if (UserKeyboard.IsKeyDown(Keys.A) && PlayerPos.X > TreeRec1.Right - 4) { PlayerPos.X += PlayerSpeed.X; }
-						if (UserKeyboard.IsKeyDown(Keys.D) && PlayerRectangle.Right < TreeRec1.Left + 4) { PlayerPos.X -= PlayerSpeed.X; }
+						if (UserKeyboard.IsKeyDown(Keys.W) && PlayerPos.Y > TreeRec1.Bottom - 5) { PlayerPos.Y += PlayerSpeed.Y; }
+						if (UserKeyboard.IsKeyDown(Keys.S) && PlayerRectangle.Bottom < TreeRec1.Top + 5) { PlayerPos.Y -= PlayerSpeed.Y; }
+						if (UserKeyboard.IsKeyDown(Keys.A) && PlayerPos.X > TreeRec1.Right - 5) { PlayerPos.X += PlayerSpeed.X; }
+						if (UserKeyboard.IsKeyDown(Keys.D) && PlayerRectangle.Right < TreeRec1.Left + 5) { PlayerPos.X -= PlayerSpeed.X; }
 					}
 					if (PlayerRectangle.Intersects(TreeRec2))
 					{
-						if (UserKeyboard.IsKeyDown(Keys.W) && PlayerPos.Y > TreeRec2.Bottom - 4) { PlayerPos.Y += PlayerSpeed.Y; }
-						if (UserKeyboard.IsKeyDown(Keys.S) && PlayerRectangle.Bottom < TreeRec2.Top + 4) { PlayerPos.Y -= PlayerSpeed.Y; }
-						if (UserKeyboard.IsKeyDown(Keys.A) && PlayerPos.X > TreeRec2.Right - 4) { PlayerPos.X += PlayerSpeed.X; }
-						if (UserKeyboard.IsKeyDown(Keys.D) && PlayerRectangle.Right < TreeRec2.Left + 4) { PlayerPos.X -= PlayerSpeed.X; }
+						if (UserKeyboard.IsKeyDown(Keys.W) && PlayerPos.Y > TreeRec2.Bottom - 5) { PlayerPos.Y += PlayerSpeed.Y; }
+						if (UserKeyboard.IsKeyDown(Keys.S) && PlayerRectangle.Bottom < TreeRec2.Top + 5) { PlayerPos.Y -= PlayerSpeed.Y; }
+						if (UserKeyboard.IsKeyDown(Keys.A) && PlayerPos.X > TreeRec2.Right - 5) { PlayerPos.X += PlayerSpeed.X; }
+						if (UserKeyboard.IsKeyDown(Keys.D) && PlayerRectangle.Right < TreeRec2.Left + 5) { PlayerPos.X -= PlayerSpeed.X; }
 					}
-					if (PlayerRectangle.Intersects(TreeRec3))
-					{
-						if (UserKeyboard.IsKeyDown(Keys.W) && PlayerPos.Y > TreeRec3.Bottom - 4) { PlayerPos.Y += PlayerSpeed.Y; }
-						if (UserKeyboard.IsKeyDown(Keys.S) && PlayerRectangle.Bottom < TreeRec3.Top + 4) { PlayerPos.Y -= PlayerSpeed.Y; }
-						if (UserKeyboard.IsKeyDown(Keys.A) && PlayerPos.X > TreeRec3.Right - 4) { PlayerPos.X += PlayerSpeed.X; }
-						if (UserKeyboard.IsKeyDown(Keys.D) && PlayerRectangle.Right < TreeRec3.Left + 4) { PlayerPos.X -= PlayerSpeed.X; }
-					}
+					//The stone has some hidden features ;]
 					if (PlayerRectangle.Intersects(StoneRec))
 					{
-						if (UserKeyboard.IsKeyDown(Keys.W) && PlayerPos.Y > StoneRec.Bottom - 4) { PlayerPos.Y += PlayerSpeed.Y; }
-						if (UserKeyboard.IsKeyDown(Keys.S) && PlayerRectangle.Bottom < StoneRec.Top + 4) { PlayerPos.Y -= PlayerSpeed.Y; }
-						if (UserKeyboard.IsKeyDown(Keys.A) && PlayerPos.X > StoneRec.Right - 4) { PlayerPos.X += PlayerSpeed.X; }
-						if (UserKeyboard.IsKeyDown(Keys.D) && PlayerRectangle.Right < StoneRec.Left + 4) { PlayerPos.X -= PlayerSpeed.X; }
+						if (UserKeyboard.IsKeyDown(Keys.W) && PlayerPos.Y > StoneRec.Bottom - 5) { PlayerPos.Y += PlayerSpeed.Y; }
+						if (UserKeyboard.IsKeyDown(Keys.S) && PlayerRectangle.Bottom < StoneRec.Top + 5) { PlayerPos.Y -= PlayerSpeed.Y; }
+						if (UserKeyboard.IsKeyDown(Keys.A) && PlayerPos.X > StoneRec.Right - 5) { PlayerPos.X += PlayerSpeed.X; }
+						if (UserKeyboard.IsKeyDown(Keys.D) && PlayerRectangle.Right < StoneRec.Left + 5) { PlayerPos.X -= PlayerSpeed.X; }
+						if (PlaysTheFlute) { Health = 3; }
+						if (!BossAlive) { Level = 3; }
 					}
 					break;
+					//Level 2 one boss, no other props. All this is handling boss movement and death for player & boss.
 				case 2:
 					if (PlayerAlive && BossAlive)
-					{ BossDirection = PlayerPos - BossPos; }
+					{
+						BossDirection = PlayerPos - BossPos;
+						if (PlayerRectangle.Intersects(BossRec))
+						{
+							Level = 1;
+							Health--;
+							PlayerPos.X = 300; PlayerPos.Y = 300;
+							BossPos.X = 400; BossPos.Y = 150;
+						}
+					}
 					else if (!PlayerAlive)
 					{ BossDirection = new Vector2(Window.ClientBounds.Width / 2, Window.ClientBounds.Height / 2) - BossPos; }
 					BossDirection.Normalize();
@@ -208,11 +226,20 @@ namespace FluteCap
 					if (BossHealth == 0)
 					{ BossAlive = false; }
 					break;
+					//Level 3, You have the monster as your own follower who will try and not get to close
 				case 3:
-					break;
+					BossDirection = PlayerPos - BossPos;
+					BossDirection.Normalize();
+					BossRotation = float.Parse(Convert.ToString(Math.Atan2(BossDirection.Y, BossDirection.X)));
+					if (!PlayerRectangle.Intersects(BossRec))
+					{ BossPos += BossDirection * BossSpeed; }
+					BossRec = new Rectangle(Convert.ToInt32(BossPos.X)-40, Convert.ToInt32(BossPos.Y)-40, Boss.Width+80, Boss.Height+80);
+					BossOrigin = new Vector2(BossRec.Width / 2, BossRec.Height / 2);
+			break;
 				case 4:
 					break;
 			}
+			//Flute mechanics for standing still while playing and charming of creatures.
 			if (HasFlute && PlayerAlive)
 			{
 				if (UserKeyboard.IsKeyDown(Keys.F) && !PlaysTheFlute)
@@ -234,6 +261,7 @@ namespace FluteCap
 					FluteCounter = 0;
 					break;
 			}
+			//Death of player
 			if (Health <= 0) { PlayerAlive = false; Level = -1; }
 			base.Update(gameTime);
 		}
@@ -255,27 +283,63 @@ namespace FluteCap
 		{
 			GraphicsDevice.Clear(Color.ForestGreen);
 			spriteBatch.Begin();
+			//A switch case determining which level to draw
 			switch (Level)
 			{
 				case 0:
+					spriteBatch.DrawString(Font, "Press Enter to start Game", PlayerPos, Color.Black);
 					break;
 				case 1:
 					spriteBatch.Draw(MountainGray, MountainRec, Color.SlateGray);
 					spriteBatch.Draw(Fence, FencePos, Color.White);
 					spriteBatch.Draw(Tree, TreePos1, Color.White);
 					spriteBatch.Draw(Tree, TreePos2, Color.White);
-					//spriteBatch.Draw(Tree, TreePos3, Color.White);
 					spriteBatch.Draw(Stone, StonePos, Color.White);
 
 					break;
 				case 2:
 					if (BossAlive)
-					{ spriteBatch.Draw(Boss, BossPos, null, Color.White, BossRotation, BossOrigin, 0.5f, SpriteEffects.None, 0); }
+					{ spriteBatch.Draw(Boss, BossPos, null, Color.White, BossRotation, BossOrigin, 1f, SpriteEffects.None, 0); }
+					else
+					{
+						spriteBatch.DrawString(Font, "You have put the monster to sleep", new Vector2(400, 400), Color.Black);
+					}
+					break;
+				case 3:
+					spriteBatch.Draw(Boss, BossPos, null, Color.White, BossRotation, BossOrigin, 1f, SpriteEffects.None, 0);
 					break;
 				case -1:
+					spriteBatch.DrawString(Font, "You Died", new Vector2(400, 400), Color.Black);
 					break;
 			}
-			if (PlayerAlive && Level != 0) { spriteBatch.Draw(Player, PlayerPos, Color.White); }
+			//Draw that are not dependant to a specific level
+			if (PlayerAlive && Level != 0)
+			{
+				spriteBatch.Draw(Player, PlayerPos, Color.White);
+				switch (Health)
+				{
+					case (3):
+						spriteBatch.Draw(Heart, Heart3, Color.White);
+						spriteBatch.Draw(Heart, Heart2, Color.White);
+						spriteBatch.Draw(Heart, Heart1, Color.White);
+						break;
+					case (2):
+						spriteBatch.Draw(Heart, Heart2, Color.White);
+						spriteBatch.Draw(Heart, Heart1, Color.White);
+						break;
+					case (1):
+						spriteBatch.Draw(Heart, Heart1, Color.White);
+						break;
+					default: //Blinking hearts if you get more than 3 health
+						if (Convert.ToInt32(gameTime.TotalGameTime.Seconds) % 2 == 0)
+						{
+							spriteBatch.Draw(Heart, Heart3, Color.White);
+							spriteBatch.Draw(Heart, Heart2, Color.White);
+							spriteBatch.Draw(Heart, Heart1, Color.White);
+						}
+						break;
+				}
+			}
 			spriteBatch.End();
 			base.Draw(gameTime);
 		}

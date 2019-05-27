@@ -4,14 +4,20 @@
   <Platform>Windows</Platform>
   <Config />
   <SourceFiles>
+    <File>Z:/Documents/Visual Studio 2015/Projects/FluteCap/Content/Font/Font.spritefont</File>
+    <File>Z:/Documents/Visual Studio 2015/Projects/FluteCap/Content/Sounds/Flute_tone.wav</File>
     <File>Z:/Documents/Visual Studio 2015/Projects/FluteCap/Content/Sounds/Kazoo-SoundBible.com-161921968.wav</File>
     <File>Z:/Documents/Visual Studio 2015/Projects/FluteCap/Content/Sprites/Fence.png</File>
+    <File>Z:/Documents/Visual Studio 2015/Projects/FluteCap/Content/Sprites/Heart.png</File>
     <File>Z:/Documents/Visual Studio 2015/Projects/FluteCap/Content/Sprites/katt.jpg</File>
     <File>Z:/Documents/Visual Studio 2015/Projects/FluteCap/Content/Sprites/Rock.png</File>
     <File>Z:/Documents/Visual Studio 2015/Projects/FluteCap/Content/Sprites/Tree.png</File>
     <File>Z:/Documents/Visual Studio 2015/Projects/FluteCap/Content/Sprites/zombie1.png</File>
   </SourceFiles>
   <DestFiles>
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />

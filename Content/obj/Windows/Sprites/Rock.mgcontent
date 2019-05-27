@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <SourceFile>//fs1.ad.ssis.nu/17maer/Documents/Visual Studio 2015/Projects/FluteCap/Content/Sprites/Rock.png</SourceFile>
-  <SourceTime>2019-05-21T11:18:26.4393213+02:00</SourceTime>
-  <DestFile>//fs1.ad.ssis.nu/17maer/Documents/Visual Studio 2015/Projects/FluteCap/Content/bin/Windows/Sprites/Rock.xnb</DestFile>
-  <DestTime>2019-05-21T11:22:33.9928523+02:00</DestTime>
+  <SourceFile>//fs1.ad.ssis.nu/17maer/documents/visual studio 2015/Projects/FluteCap/Content/Sprites/Rock.png</SourceFile>
+  <SourceTime>2019-05-21T11:30:38.106029+02:00</SourceTime>
+  <DestFile>//fs1.ad.ssis.nu/17maer/documents/visual studio 2015/Projects/FluteCap/Content/bin/Windows/Sprites/Rock.xnb</DestFile>
+  <DestTime>2019-05-27T22:47:54.3146322+02:00</DestTime>
   <Importer>TextureImporter</Importer>
   <ImporterTime>2018-12-08T17:35:54+01:00</ImporterTime>
   <Processor>TextureProcessor</Processor>

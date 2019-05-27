@@ -1,2 +1,2 @@
 Source File,Dest File,Processor Type,Content Type,Source File Size,Dest File Size,Build Seconds
-"//fs1.ad.ssis.nu/17maer/Documents/Visual Studio 2015/Projects/FluteCap/Content/Sprites/Rock.png","//fs1.ad.ssis.nu/17maer/Documents/Visual Studio 2015/Projects/FluteCap/Content/bin/Windows/Sprites/Rock.xnb","TextureProcessor","Texture2DContent",19475,12285,0,8056384
+"//fs1.ad.ssis.nu/17maer/documents/visual studio 2015/Projects/FluteCap/Content/Sounds/Flute_tone.wav","//fs1.ad.ssis.nu/17maer/documents/visual studio 2015/Projects/FluteCap/Content/bin/Windows/Sounds/Flute_tone.xnb","SoundEffectProcessor","SoundEffectContent",4469804,4469865,1,117808

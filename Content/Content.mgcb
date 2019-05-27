@@ -13,6 +13,19 @@
 
 #---------------------------------- Content ---------------------------------#
 
+#begin Font/Font.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:PremultiplyAlpha=True
+/processorParam:TextureFormat=Compressed
+/build:Font/Font.spritefont
+
+#begin Sounds/Flute_tone.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Flute_tone.wav
+
 #begin Sounds/Kazoo-SoundBible.com-161921968.wav
 /importer:WavImporter
 /processor:SoundEffectProcessor
@@ -30,6 +43,18 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:Sprites/Fence.png
+
+#begin Sprites/Heart.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Sprites/Heart.png
 
 #begin Sprites/katt.jpg
 /importer:TextureImporter

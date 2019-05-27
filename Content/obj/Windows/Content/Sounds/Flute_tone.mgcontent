@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PipelineBuildEvent xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <SourceFile>Z:/Documents/Visual Studio 2015/Projects/FluteCap/Content/Sounds/Flute_tone.wav</SourceFile>
+  <SourceTime>2019-05-27T23:30:57.0941054+02:00</SourceTime>
+  <DestFile>Z:/Documents/Visual Studio 2015/Projects/FluteCap/Content/bin/Windows/Content/Sounds/Flute_tone.xnb</DestFile>
+  <DestTime>2019-05-27T23:36:55.3721035+02:00</DestTime>
+  <Importer>WavImporter</Importer>
+  <ImporterTime>2018-12-08T17:35:54+01:00</ImporterTime>
+  <Processor>SoundEffectProcessor</Processor>
+  <ProcessorTime>2018-12-08T17:35:54+01:00</ProcessorTime>
+  <Parameters>
+    <Key>Quality</Key>
+    <Value>Best</Value>
+  </Parameters>
+  <Dependencies />
+  <BuildAsset />
+  <BuildOutput />
+</PipelineBuildEvent>

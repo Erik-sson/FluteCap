@@ -25,3 +25,6 @@
 \\fs1.ad.ssis.nu\17maer\Documents\Visual Studio 2015\Projects\FluteCap\bin\Windows\x86\Debug\Content\Sprites\Fence.xnb
 \\fs1.ad.ssis.nu\17maer\Documents\Visual Studio 2015\Projects\FluteCap\bin\Windows\x86\Debug\Content\Sprites\Tree.xnb
 \\fs1.ad.ssis.nu\17maer\Documents\Visual Studio 2015\Projects\FluteCap\bin\Windows\x86\Debug\Content\Sprites\Rock.xnb
+\\fs1.ad.ssis.nu\17maer\Documents\Visual Studio 2015\Projects\FluteCap\bin\Windows\x86\Debug\Content\Sprites\Heart.xnb
+\\fs1.ad.ssis.nu\17maer\documents\visual studio 2015\Projects\FluteCap\bin\Windows\x86\Debug\Content\Font\Font.xnb
+\\fs1.ad.ssis.nu\17maer\documents\visual studio 2015\Projects\FluteCap\bin\Windows\x86\Debug\Content\Sounds\Flute_tone.xnb

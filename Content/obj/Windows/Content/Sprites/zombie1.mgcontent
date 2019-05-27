@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <SourceFile>Z:/Documents/Visual Studio 2015/Projects/FluteCap/Content/Sprites/zombie1.png</SourceFile>
-  <SourceTime>2019-04-09T09:10:18+02:00</SourceTime>
+  <SourceTime>2019-05-27T22:47:38.2858784+02:00</SourceTime>
   <DestFile>Z:/Documents/Visual Studio 2015/Projects/FluteCap/Content/bin/Windows/Content/Sprites/zombie1.xnb</DestFile>
-  <DestTime>2019-05-03T23:56:32.8940954+02:00</DestTime>
+  <DestTime>2019-05-27T22:47:57.4593964+02:00</DestTime>
   <Importer>TextureImporter</Importer>
   <ImporterTime>2018-12-08T17:35:54+01:00</ImporterTime>
   <Processor>TextureProcessor</Processor>
