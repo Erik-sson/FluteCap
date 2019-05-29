@@ -8,9 +8,7 @@ using System.Linq;
 
 namespace FluteCap
 {
-	/// <summary>
-	/// This is the main type for your game.
-	/// </summary>
+
 	public class Game1 : Game
 	{
 		GraphicsDeviceManager graphics;
@@ -56,18 +54,12 @@ namespace FluteCap
 			Content.RootDirectory = "Content";
 		}
 
-		/// <summary>
-		/// Allows the game to perform any initialization it needs to before starting to run.
-		/// This is where it can query for any required services and load any non-graphic
-		/// related content.  Calling base.Initialize will enumerate through any components
-		/// and initialize them as well.
-		/// </summary>
 		protected override void Initialize()
 		{
 			//Player
 			PlayerPos.X = 400; PlayerPos.Y = 400;
 			PlayerSpeed.X = 4; PlayerSpeed.Y = 4;
-			PlayerImmobilized = false; HasFlute = true; PlaysTheFlute = false;
+			PlayerImmobilized = false; HasFlute = false; PlaysTheFlute = false;
 			PlayerAlive = true;
 			FluteCounter = 0; Health = 3;
 			//Level one Props
@@ -89,10 +81,6 @@ namespace FluteCap
 			base.Initialize();
 		}
 
-		/// <summary>
-		/// LoadContent will be called once per game and is the place to load
-		/// all of your content.
-		/// </summary>
 		protected override void LoadContent()
 		{
 			// Create a new SpriteBatch, which can be used to draw textures.
@@ -104,36 +92,27 @@ namespace FluteCap
 			Tree = Content.Load<Texture2D>("Sprites/Tree");
 			Boss = Content.Load<Texture2D>("Sprites/Zombie1");
 			Flute = Content.Load<SoundEffect>("Sounds/Kazoo-SoundBible.com-161921968"); 
-			Flute = Content.Load<SoundEffect>("Sounds/Flute_tone");				//Changing to this will not be the accurate music for the game
+			//Flute = Content.Load<SoundEffect>("Sounds/Flute_tone");				//Changing to this will not be the accurate music for the game
 																				//but it might be a nicer sound
 			Stone = Content.Load<Texture2D>("Sprites/Rock");
 			Heart = Content.Load<Texture2D>("Sprites/Heart");
 			Font = Content.Load<SpriteFont>("Font/Font");
-			// TODO: use this.Content to load your game content here
 		}
 
-		/// <summary>
-		/// UnloadContent will be called once per game and is the place to unload
-		/// game-specific content.
-		/// </summary>
+
 		protected override void UnloadContent()
 		{
-			// TODO: Unload any non ContentManager content here
 			MountainGray.Dispose();
 		}
 
-		/// <summary>
-		/// Allows the game to run logic such as updating the world,
-		/// checking for collisions, gathering input, and playing audio.
-		/// </summary>
-		/// <param name="gameTime">Provides a snapshot of timing values.</param>
+
 		protected override void Update(GameTime gameTime)
 		{
 			if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
 				Exit();
 			KeyboardState UserKeyboard = Keyboard.GetState();
 			//Player controlls and check if the player tries to escape.
-			if (PlayerAlive)
+			if (PlayerAlive && Level != 0)
 			{
 				if (!PlayerImmobilized)
 				{
@@ -145,7 +124,9 @@ namespace FluteCap
 				PlayerRectangle = new Rectangle(Convert.ToInt32(PlayerPos.X), Convert.ToInt32(PlayerPos.Y), Player.Width, Player.Height);
 				OutOfArea = CheckBounds(PlayerRectangle, Window.ClientBounds);
 				if (OutOfArea == true)
-				{ PlayerPos.X = 300; PlayerPos.Y = 300; Health--; Level = 1; }
+				{ PlayerPos.X = 300; PlayerPos.Y = 300; Health--; Level = 1;
+				PlayerRectangle = new Rectangle(Convert.ToInt32(PlayerPos.X), Convert.ToInt32(PlayerPos.Y), Player.Width, Player.Height);
+				}
 			}
 			Heart1.X = PlayerPos.X; Heart1.Y = PlayerPos.Y - 20;
 			Heart2.X = PlayerPos.X + 20 ; Heart2.Y = PlayerPos.Y - 20;
@@ -197,6 +178,7 @@ namespace FluteCap
 						if (UserKeyboard.IsKeyDown(Keys.S) && PlayerRectangle.Bottom < StoneRec.Top + 5) { PlayerPos.Y -= PlayerSpeed.Y; }
 						if (UserKeyboard.IsKeyDown(Keys.A) && PlayerPos.X > StoneRec.Right - 5) { PlayerPos.X += PlayerSpeed.X; }
 						if (UserKeyboard.IsKeyDown(Keys.D) && PlayerRectangle.Right < StoneRec.Left + 5) { PlayerPos.X -= PlayerSpeed.X; }
+						if (!HasFlute) { HasFlute = true; }
 						if (PlaysTheFlute) { Health = 3; }
 						if (!BossAlive) { Level = 3; }
 					}
@@ -268,17 +250,14 @@ namespace FluteCap
 
 		private bool CheckBounds(Rectangle playerRectangle, Rectangle clientBounds)
 		{
-			if (playerRectangle.Left < 0) { return true; }
-			else if (playerRectangle.Right > clientBounds.Width) { return true; }
-			else if (playerRectangle.Bottom > clientBounds.Height) { return true; }
-			else if (playerRectangle.Top < 0) { return true; }
+			if (playerRectangle.Left < 10) { return true; }
+			else if (playerRectangle.Right > clientBounds.Width - 10) { return true; }
+			else if (playerRectangle.Bottom > clientBounds.Height - 10) { return true; }
+			else if (playerRectangle.Top < 10) { return true; }
 			else { return false; }
 		}
 
-		/// <summary>
-		/// This is called when the game should draw itself.
-		/// </summary>
-		/// <param name="gameTime">Provides a snapshot of timing values.</param>
+	
 		protected override void Draw(GameTime gameTime)
 		{
 			GraphicsDevice.Clear(Color.ForestGreen);
